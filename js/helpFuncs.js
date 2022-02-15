@@ -35,7 +35,7 @@ export const setSkybox = (scene, option) => {
   const skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
   skyboxMaterial.backFaceCulling = false;
   skyboxMaterial.disableLighting = true;
-  skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("./../assets/images/skybox/TropicalSunnyDay/skybox", scene);
+  skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("./assets/images/skybox/TropicalSunnyDay/skybox", scene);
   skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
   const skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {
     size: option.groundWidth,
@@ -45,7 +45,7 @@ export const setSkybox = (scene, option) => {
 }
 
 export const setGrass = (scene, option) => {
-  const grassTexture = new BABYLON.Texture("./../assets/images/grass_txt.jpg", scene);
+  const grassTexture = new BABYLON.Texture("./assets/images/grass_txt.jpg", scene);
   grassTexture.uScale = option.groundWidth / 4;
   grassTexture.vScale = option.groundHeight / 4;
   const groundMaterial = new BABYLON.StandardMaterial("groundMaterial", scene);
@@ -58,19 +58,19 @@ export const setGrass = (scene, option) => {
   ground.material = groundMaterial;
   ground.position.z = -0.1;
   const grassPartsCount = 4000;
-  const spriteManagerGrass = new BABYLON.SpriteManager("grassManager", "./../assets/images/grass_part.png", grassPartsCount, {
+  const spriteManagerGrass = new BABYLON.SpriteManager("grassManager", "./assets/images/grass_part.png", grassPartsCount, {
     width: 100,
     height: 100
   }, scene);
-  const spriteManagerGrass1 = new BABYLON.SpriteManager("grassManager1", "./../assets/images/grass_part1.png", grassPartsCount, {
+  const spriteManagerGrass1 = new BABYLON.SpriteManager("grassManager1", "./assets/images/grass_part1.png", grassPartsCount, {
     width: 100,
     height: 133
   }, scene);
-  const spriteManagerGrass2 = new BABYLON.SpriteManager("grassManager2", "./../assets/images/grass_part2.png", grassPartsCount, {
+  const spriteManagerGrass2 = new BABYLON.SpriteManager("grassManager2", "./assets/images/grass_part2.png", grassPartsCount, {
     width: 100,
     height: 67
   }, scene);
-  const spriteManagerGrass3 = new BABYLON.SpriteManager("grassManager3", "./../assets/images/grass_part3.png", grassPartsCount, {
+  const spriteManagerGrass3 = new BABYLON.SpriteManager("grassManager3", "./assets/images/grass_part3.png", grassPartsCount, {
     width: 100,
     height: 75
   }, scene);

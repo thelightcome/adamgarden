@@ -35,11 +35,11 @@ setGrass(scene, SCENE_OPTION);
 startBtn.addEventListener("click", () => {
   main.classList.remove("loaded");
 
-  const grabFruitMusic = new BABYLON.Sound("grabFruitMusic", "./../assets/music/grab.mp3", scene, null, {
+  const grabFruitMusic = new BABYLON.Sound("grabFruitMusic", "./assets/music/grab.mp3", scene, null, {
     volume: 1
   });
 
-  const gardenMusic = new BABYLON.Sound("gardenMusic", "./../assets/music/garden.mp3", scene, null, {
+  const gardenMusic = new BABYLON.Sound("gardenMusic", "./assets/music/garden.mp3", scene, null, {
     volume: 2,
     autoplay: true,
   });
