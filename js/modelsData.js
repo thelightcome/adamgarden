@@ -1,6 +1,6 @@
 export const modelsData = [{
     id: "tree01",
-    modelPath: "./assets/models/trees/Tree01/",
+    modelPath: "/assets/models/trees/Tree01/",
     modelName: "tree01.obj",
     model: null,
     modelChange: (meshes, obj, scene) => {
@@ -18,7 +18,7 @@ export const modelsData = [{
   },
   {
     id: "apple",
-    modelPath: "./assets/models/fruits/apple/",
+    modelPath: "/assets/models/fruits/apple/",
     modelName: "apple.obj",
     model: null,
     modelChange: (meshes, obj, scene) => {
@@ -30,7 +30,7 @@ export const modelsData = [{
   },
   {
     id: "lemon",
-    modelPath: "./assets/models/fruits/lemon/",
+    modelPath: "/assets/models/fruits/lemon/",
     modelName: "lemon.obj",
     model: null,
     modelChange: (meshes, obj, scene) => {
