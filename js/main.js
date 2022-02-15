@@ -28,21 +28,18 @@ const {
   scene,
 } = initScene(engine, canvas, SCENE_OPTION);
 
-
-
-
 setSkybox(scene, SCENE_OPTION);
 
 setGrass(scene, SCENE_OPTION);
 
 startBtn.addEventListener("click", () => {
   main.classList.remove("loaded");
-  
-  const grabFruitMusic = new BABYLON.Sound("grabFruitMusic", "../assets/music/grab.mp3", scene, null, {
+
+  const grabFruitMusic = new BABYLON.Sound("grabFruitMusic", "./../assets/music/grab.mp3", scene, null, {
     volume: 1
   });
 
-  const gardenMusic = new BABYLON.Sound("gardenMusic", "../assets/music/garden.mp3", scene, null, {
+  const gardenMusic = new BABYLON.Sound("gardenMusic", "./../assets/music/garden.mp3", scene, null, {
     volume: 2,
     autoplay: true,
   });
@@ -76,6 +73,8 @@ startBtn.addEventListener("click", () => {
 
     main.classList.add("hide");
 
+    engine.resize();
+    
     engine.runRenderLoop(function () {
       scene.render();
     });
