@@ -12,5 +12,5 @@ newmtl apple
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.7782 0.7557 0.6238
 	Ke 0.0000 0.0000 0.0000
-	map_Ka Apple.JPG
-	map_Kd Apple.JPG
+	map_Ka ./Apple.JPG
+	map_Kd ./Apple.JPG
