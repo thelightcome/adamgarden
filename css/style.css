@@ -1,0 +1,101 @@
+html,
+body {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-size: 10px;
+  background: linear-gradient(to bottom, #23395E, #304C7B 30%, #527CAE 70%, #7CAACE 85%, #F2F7F3);
+}
+
+.main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/images/skybox/TropicalSunnyDay/skybox_pz.jpg");
+  background-size: cover;
+  z-index: 1;
+  transform: translateY(0%);
+  opacity: 1;
+  transition: 0.3s linear;
+}
+
+.main.hide {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10rem;
+  height: 10rem;
+}
+
+.loading::before,
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1rem solid #f0f0f033;
+  transform-origin: 50% 50%;
+}
+
+.loading:after {
+  border-right-color: #f0f0f0cc;
+  animation: loading 1s linear 0s infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.main.hide .loading,
+.main.loaded .loading {
+  display: none;
+}
+
+.start {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22rem;
+  height: 8rem;
+  border-radius: 1rem;
+  font-size: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.4rem;
+  cursor: pointer;
+  display: none;
+}
+
+.main.loaded .start {
+  display: block;
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
