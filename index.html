@@ -5,19 +5,42 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Scene</title>
+  <title>Garden of Eden</title>
+  <link rel="icon" type="image/x-icon" href="./assets/images/icons/logo.svg">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 
-<body>
-  <div class="main">
-    <div class="loading"></div>
-    <button class="start">Start</button>
+<body class="load">
+  <div class="loading">
+    <div class="loading_spinner"></div>
   </div>
-  <canvas id="canvas"></canvas>
+  <div class="menu">
+    <div class="logotype">
+      <img src="./assets/images/icons/logo.svg" alt="">
+    </div>
+    <button class="start"><span>S</span><span>t</span><span>a</span><span>r</span><span>t</span></button>
+    <div class="menu_list"></div>
+  </div>
+  <div class="option">
+    <div class="option_item sound_btn">
+      <img src="./assets/images/icons/speaker.svg" alt="">
+      <img src="./assets/images/icons/speaker-off.svg" alt="">
+    </div>
+    <div class="option_item menu_btn"><img src="./assets/images/icons/menu.svg" alt=""></div>
+    <div class="option_item refresh_btn"><img src="./assets/images/icons/refresh.svg" alt=""></div>
+    <div class="option_item count_item">
+      <img src="" alt="">
+      <span class="count_item_value">0</span>
+    </div>
+  </div>
+  <canvas class="canvas"></canvas>
+  <audio class="menu_audio" src="./assets/music/garden.mp3" load></audio>
 
   <script type="module" src="./libs/babylon.js"></script>
   <script type="module" src="./libs/babylonjs.loaders.min.js"></script>
+  <script type="module" src="./libs/babylon.skyMaterial.js"></script>
+  <script type="module" src="./libs/babylon.furMaterial.js"></script>
+  <script type="module" src="./libs/babylon.grassProceduralTexture.js"></script>
   <script type="module" src="./js/main.js" defer></script>
 </body>
 

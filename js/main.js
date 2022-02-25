@@ -1,121 +1,90 @@
 import {
-  initScene,
-  setSkybox,
-  setGrass,
-  loadModels,
-} from "./helpFuncs.js";
+  gardenList
+} from "./gardenList.js";
 
 import {
-  SCENE_OPTION
-} from "./sceneOption.js";
+  fruitsList
+} from "./fruitsList.js";
 
 import {
-  modelsData
-} from "./modelsData.js";
+  Garden
+} from "./Garden.js";
 
-import {
-  fruitData
-} from "./data.js";
 
-const main = document.querySelector(".main");
-const startBtn = document.querySelector(".start");
-const canvas = document.querySelector("#canvas");
-const engine = new BABYLON.Engine(canvas, true);
+const menuList = document.querySelector(".menu_list");
 
-main.classList.add("loaded");
-
-const {
-  scene,
-} = initScene(engine, canvas, SCENE_OPTION);
-
-setSkybox(scene, SCENE_OPTION);
-
-setGrass(scene, SCENE_OPTION);
-
-startBtn.addEventListener("click", () => {
-  main.classList.remove("loaded");
-
-  const grabFruitMusic = new BABYLON.Sound("grabFruitMusic", "./assets/music/grab.mp3", scene, null, {
-    volume: 1
-  });
-
-  const gardenMusic = new BABYLON.Sound("gardenMusic", "./assets/music/garden.mp3", scene, null, {
-    volume: 2,
-    autoplay: true,
-  });
-
-  loadModels(modelsData, scene).then(() => {
-    fruitData.apple.forEach((pos, posInd) => {
-      setFruit(modelsData[1].model, pos, posInd, modelsData[0].model);
-    });
-
-    scene.onPointerObservable.add((pointerInfo) => {
-      if (pointerInfo.type === BABYLON.PointerEventTypes.POINTERDOWN) {
-        const ray = scene.createPickingRay(scene.pointerX, scene.pointerY, BABYLON.Matrix.Identity(), scene.activeCameras[0]);
-        const pick = scene.pickWithRay(ray);
-        if (pick.hit) {
-          const pickedMesh = pick.pickedMesh;
-          if (pickedMesh.meshType === "fruit") {
-            animGrabFruit(pickedMesh, scene);
-            grabFruitMusic.play();
-          }
-
-          // if (pickedMesh.meshType === "wrapbox") {
-          //   setFruitHelper();
-          // }
-        }
-      }
-    });
-
-    window.addEventListener("resize", () => {
-      engine.resize();
-    });
-
-    main.classList.add("hide");
-
-    engine.resize();
-    
-    engine.runRenderLoop(function () {
-      scene.render();
-    });
-  });
+gardenList.forEach((garden) => {
+  const div = document.createElement("div");
+  div.classList.add("menu_item");
+  div.setAttribute("data-type", garden.name);
+  const img = document.createElement("img");
+  img.src = garden.image;
+  div.appendChild(img);
+  menuList.appendChild(div);
 });
 
-function setFruit(mesh, pos, index = 0, tree) {
-  const clone = mesh.clone(mesh.name + "-i-" + index);
-  clone.position = pos;
-  clone.parent = tree;
-}
+const startBtn = document.querySelector(".start");
+startBtn.addEventListener("click", () => {
+  menuList.classList.add("active");
+});
 
-function animGrabFruit(mesh, scene) {
-  const frameRate = 30;
+document.body.classList.remove("load");
 
-  const ySlide = new BABYLON.Animation("xSlide", "position.y", frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+const canvas = document.querySelector(".canvas");
+const countItemValue = document.querySelector(".count_item .count_item_value");
+const garden = new Garden(canvas, countItemValue);
 
-  const keyFrames = [{
-    frame: 0,
-    value: mesh.position.y,
-  }, {
-    frame: 5,
-    value: mesh.position.y + 0.3,
-  }, {
-    frame: frameRate,
-    value: mesh.position.y - 2,
-  }];
+let state = "menu";
+let gardenObject = null;
+let fruitObject = null;
 
-  ySlide.setKeys(keyFrames);
-  ySlide.addEvent(new BABYLON.AnimationEvent(frameRate - 1, () => {
-    mesh.dispose();
-  }));
+const menuAudio = document.querySelector(".menu_audio");
+let audioState = false;
 
-  mesh.animations.push(ySlide);
+const countItemImg = document.querySelector(".count_item img");
 
-  scene.beginAnimation(mesh, 0, frameRate, true);
-}
+menuList.addEventListener("click", async (e) => {
+  const menuItem = e.target.closest(".menu_item");
+  if (menuItem) {
+    if (audioState) garden.toggleAudio();
+    const menuType = menuItem.dataset.type;
+    gardenObject = gardenList.find(garden => garden.name === menuType);
+    fruitObject = fruitsList.filter(fruit => fruit.type.find(type => type === menuType));
+    document.body.classList.add("load");
+    countItemImg.src = gardenObject.image;
+    await garden.setGarden(gardenObject, fruitObject);
+    if (!menuAudio.paused) menuAudio.pause();
+    document.body.classList.remove("load");
+    document.body.classList.add("started");
+    state = "garden";
+  }
+});
 
-function setFruitHelper() {
-  const invertParentWorldMatrix = pickedMesh.getWorldMatrix().clone();
-  const pos = BABYLON.Vector3.TransformCoordinates(pick.pickedPoint, invertParentWorldMatrix.invert());
-  console.log(`new BABYLON.Vector3(${ pos.x }, ${ pos.y - 0.056 }, ${ pos.z })`);
-  setFruit(modelsData[1].model, new BABYLON.Vector3(pos.x, pos.y - 0.056, pos.z), pos.x, modelsData[0].model);
-}
+const soundBtn = document.querySelector(".sound_btn");
+soundBtn.addEventListener("click", () => {
+  soundBtn.classList.toggle("active");
+  audioState = !audioState;
+  if (state === "menu") {
+    if (menuAudio.paused) menuAudio.play();
+    else menuAudio.pause();
+  } else {
+    garden.toggleAudio();
+  }
+});
+
+const menuBtn = document.querySelector(".menu_btn");
+menuBtn.addEventListener("click", () => {
+  garden.resetGarden();
+  document.body.classList.remove("started");
+  state = "menu";
+  if (audioState && menuAudio.paused) menuAudio.play();
+});
+
+const refreshBtn = document.querySelector(".refresh_btn");
+refreshBtn.addEventListener("click", async () => {
+  document.body.classList.add("load");
+  garden.resetGarden();
+  if (audioState) garden.toggleAudio();
+  await garden.setGarden(gardenObject, fruitObject);
+  document.body.classList.remove("load");
+});

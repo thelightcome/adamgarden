@@ -1,0 +1,189 @@
+html,
+body {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-size: 10px;
+  background: linear-gradient(to bottom, rgba(4, 107, 193, 1) 0%, rgba(6, 151, 223, 1) 0%, rgba(27, 167, 233, 1) 26%, rgba(76, 173, 235, 1) 61%, rgba(132, 200, 248, 1) 93%);
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100500;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/images/skybox/TropicalSunnyDay/skybox_pz.jpg");
+  background-position: 50% 0%;
+  transition: 0.5s;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s linear;
+}
+
+.load .loading {
+  opacity: 1;
+  pointer-events: unset;
+}
+
+.loading_spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10rem;
+  height: 10rem;
+}
+
+.loading_spinner::before,
+.loading_spinner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1rem solid #f0f0f033;
+  transform-origin: 50% 50%;
+}
+
+.loading_spinner:after {
+  border-right-color: #f0f0f0cc;
+  animation: none;
+}
+
+.load .loading_spinner:after {
+  animation: loading 1s linear 0s infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/images/skybox/TropicalSunnyDay/skybox_pz.jpg");
+  background-position: 50% 0%;
+  box-sizing: border-box;
+  padding: 10% 5% 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 1;
+  transform: translateY(0%);
+  opacity: 1;
+  transition: 0.3s linear;
+}
+
+.started .menu {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.logotype {
+  margin-bottom: 3rem;
+}
+
+.menu_list {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.menu_item {
+  width: 20rem;
+  height: 20rem;
+  box-sizing: border-box;
+  border: 0.3rem solid transparent;
+  background: #000;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: 0.3s linear;
+}
+
+.menu_item:hover {
+  border: 0.3rem solid #f5f5f5;
+}
+
+.menu_item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.option_item {
+  position: absolute;
+  top: 1.5rem;
+  z-index: 5;
+  width: 6rem;
+  height: 6rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.option_item.sound_btn {
+  left: 3rem;
+}
+
+.option_item.sound_btn img:first-child,
+.option_item.sound_btn.active img:last-child {
+  display: none;
+}
+
+.option_item.sound_btn.active img:first-child,
+.option_item.sound_btn img:last-child {
+  display: block;
+}
+
+.option_item.menu_btn,
+.option_item.refresh_btn {
+  right: 3rem;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.option_item.refresh_btn {
+  right: 12rem;
+}
+
+.option_item img {
+  width: 100%;
+}
+
+.started .option_item.menu_btn,
+.started .option_item.refresh_btn {
+  opacity: 1;
+  pointer-events: unset;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garden of Eden</title>
+  <link rel="icon" type="image/x-icon" href="./assets/images/logotype.svg">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="load">
+  <div class="loading">
+    <div class="loading_spinner"></div>
+  </div>
+  <div class="menu">
+    <div class="logotype">
+      <img src="./assets/images/logotype.svg" alt="">
+    </div>
+    <div class="menu_list"></div>
+  </div>
+  <div class="option">
+    <div class="option_item sound_btn">
+      <img src="./assets/images/speaker.svg" alt="">
+      <img src="./assets/images/speaker-off.svg" alt="">
+    </div>
+    <div class="option_item menu_btn"><img src="./assets/images/menu.svg" alt=""></div>
+    <div class="option_item refresh_btn"><img src="./assets/images/refresh.svg" alt=""></div>
+  </div>
+  <canvas class="canvas"></canvas>
+  <audio class="menu_audio" src="./assets/music/garden.mp3" load></audio>
+
+  <script type="module" src="./libs/babylon.js"></script>
+  <script type="module" src="./libs/babylonjs.loaders.min.js"></script>
+  <script type="module" src="./js/main.js" defer></script>
+</body>
+
+</html>
